@@ -1,8 +1,10 @@
 import { FormEvent } from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "@firebase/auth";
+import { useAuthContext } from "../context/AuthContext";
 
 const SignUp: React.FC = () => {
+  const { user } = useAuthContext();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
@@ -13,7 +15,7 @@ const SignUp: React.FC = () => {
   }
   return (
     <div>
-      <h1>ユーザー登録</h1>
+      <h1>ユーザー登録 {user?.email}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">メールアドレス</label>
