@@ -6,7 +6,8 @@ import { useNavigate } from "react-router";
 const Home = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-
+    signOut(auth)
+    navigate('/login')
   };
   return (
     <div>
