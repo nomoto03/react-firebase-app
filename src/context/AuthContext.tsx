@@ -21,9 +21,11 @@ type Props = {
 
 export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<GlobalAuthState>(initialState);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const value = {
     user: user.user,
+    loading,
   };
 
   useEffect(() => {
@@ -32,11 +34,16 @@ export function AuthProvider({ children }: Props) {
       setUser({
         user: authUser,
       });
+      setLoading(false);
     });
     return () => {
       unsubscribed();
     };
   }, []);
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }

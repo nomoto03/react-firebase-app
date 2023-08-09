@@ -1,20 +1,26 @@
 import React from "react";
 import { auth } from "../firebase";
 import { signOut } from "@firebase/auth";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
+import { useAuthContext } from "../context/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
   const handleLogout = () => {
-    signOut(auth)
-    navigate('/login')
+    signOut(auth);
+    navigate("/login");
   };
-  return (
-    <div>
-      <h1>ホームページ</h1>
-      <button onClick={handleLogout}></button>
-    </div>
-  )
+  if (!user) {
+    return <Navigate to="/login" />;
+  } else {
+    return (
+      <div>
+        <h1>ホームページ</h1>
+        <button onClick={handleLogout}>ログアウト</button>
+      </div>
+    );
+  }
 };
 
 export default Home;
