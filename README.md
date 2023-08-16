@@ -1,3 +1,7 @@
+# React x Firebase による認証アプリ
+以下を参考に作成
+https://reffect.co.jp/react/react18-firebase9-auth/
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
